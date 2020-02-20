@@ -1,38 +1,30 @@
-const express = require("express");
-const logger = require("morgan");
-const mongoose = require("mongoose");
+const express = require('express');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const routes = require('./controllers/api');
+const path = require('path');
+
+require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 
-app.use(logger("dev"));
+mongoose.connect(process.env.DB,
+{ useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => console.log('Database connected successfully'))
+	.catch(err => console.log(err)
+);
 
-// var db = require ("./models");
+app.use(logger('dev'));
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("public"));
-
-// Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// Connect to Mongo DB with Mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/", {
-  useNewUrlParser: true,
-  useFindAndModify: false
+app.use(bodyParser.json());
+app.use('/api', routes);
+app.use((err, req, res, next) => {
+    console.log(err);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
-// Set Handlebars.
-var exphbs = require("express-handlebars");
-
-// Set view engine as handlebars file type
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-// Import routes and give the server access to them.
-require("./controllers/")(app);
-
-// Start our server so that it can begin listening to client requests.
-app.listen(PORT, () => {
-    console.log(`Application running on PORT ${PORT}`);
-  });
+app.listen(port, () => { console.log('Server running on port ' + port) });
