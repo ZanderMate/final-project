@@ -23,26 +23,28 @@ const Signup = () => {
                         setEmail("");
                         setPassword("");
                         setUserType("customer");
+                        console.log("Added vendor to database!")
                     }
                 })
                 .catch(err => console.log(err))
         }
-        else if (userType === "customer") {
+        else {
             axios.post('/api/clientlogin', {
                 email: email,
                 password: password,
+                userType: userType
             })
                 .then(res => {
                     if (res.data) {
                         setEmail("");
                         setPassword("");
                         setUserType("customer");
-
+                        console.log("Added client to database!")
                     }
                 })
                 .catch(err => console.log(err))
         }
-    }
+    };
 
     const handleFormSubmit = e => {
         e.preventDefault();
@@ -74,11 +76,11 @@ const Signup = () => {
                     <input type="text" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
                     <br />
                     <br />
-                    <input type="radio" value="customer" name="userType" onClick={() => setUserType('customer')} checked={userType === 'customer'} />
-                    <label class="checkbox-container"> Customer </label>
+                    <input type="radio" value="customer" name="userType" onChange={() => setUserType('customer')} onClick={() => setUserType('customer')} checked={userType === 'customer'} />
+                    <label> Customer </label>
                     <br />
-                    <input type="radio" value="vendor" name="userType" onClick={() => setUserType('vendor')} checked={userType === 'vendor'} />                <span class="checkmark" />
-                    <label class="checkbox-container"> Vendor </label>
+                    <input type="radio" value="vendor" name="userType" onChange={() => setUserType('vendor')} onClick={() => setUserType('vendor')} checked={userType === 'vendor'} />
+                    <label> Vendor </label>
                     <br />
                     <input
                         type="submit"

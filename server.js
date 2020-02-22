@@ -3,7 +3,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./controllers/api');
-const path = require('path');
+const bcrypt = require('bcrypt')
 
 require('dotenv').config();
 

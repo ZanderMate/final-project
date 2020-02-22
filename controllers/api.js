@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const VendorLogin = require('../models/vendorlogin');
 const ClientLogin = require('../models/clientlogin');
 const SaleItem = require('../models/items');
+const passport = require('passport');
 
 //show what is in cart
 // router.get('/cart', (req, res, next) => {
@@ -11,6 +13,13 @@ const SaleItem = require('../models/items');
 //         .then(data => res.json(data))
 //         .catch(next)
 // });
+
+// router.get('/vendorlogin', (req, res, next) => {
+//         VendorLogin
+//             .find({})
+//             .then(data => res.json(data))
+//             .catch(next)
+//     });
 
 //show all the sale items
 router.get('/sale-items', (req, res, next) => {
@@ -21,9 +30,9 @@ router.get('/sale-items', (req, res, next) => {
 });
 
 //add client info
-router.post('/clientlogin', (req, res, next) => {
-    console.log(req.body);
-    if (req.body.email && req.body.password) {
+router.post('/clientlogin', async (req, res, next) => {
+    const hashedPasswordClient = await bcrypt.hash(req.body.password, 10)
+    if (req.body.email && hashedPasswordClient) {
         ClientLogin
             .create(req.body)
             .then(result => res.json(result))
@@ -32,8 +41,9 @@ router.post('/clientlogin', (req, res, next) => {
 });
 
 //add vendor login info
-router.post('/vendorlogin', (req, res, next) => {
-    if (req.body.businessName && req.body.email && req.body.password) {
+router.post('/vendorlogin', async (req, res, next) => {
+    const hashedPasswordVendor = await bcrypt.hash(req.body.password, 10)
+    if (req.body.businessName && req.body.email && hashedPasswordVendor) {
         VendorLogin
             .create(req.body)
             .then(result => res.json(result))
