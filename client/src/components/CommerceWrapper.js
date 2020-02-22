@@ -1,16 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ClientLogInPage from './clientloginpage';
-import VendorLogInPage from './vendorloginpage';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LogInPage from './pages/Loginpage';
+import Home from './pages/home';
+import Signup from './pages/Signup'
 
 const CommerceWrapper = () => {
     return (
         <div>
             <Router>
-                <Switch>
-                    <Route exact path="/clientlogin" component={ClientLogInPage} />
-                    <Route exact path="/vendorlogin" component={VendorLogInPage} />
-                </Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={LogInPage} />
+                <Route exact path="/signup" component={Signup} />
             </Router>
         </div>
     )

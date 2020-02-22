@@ -8,6 +8,10 @@ const ClientLoginSchema = new Schema({
     password: {
         type: String,
         required: [true, 'The text field is required']
+    },
+    userType: {
+        type: String,
+        required: [true, 'The text field is required']
     }
 })
 

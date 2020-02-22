@@ -22,6 +22,7 @@ router.get('/sale-items', (req, res, next) => {
 
 //add client info
 router.post('/clientlogin', (req, res, next) => {
+    console.log(req.body);
     if (req.body.email && req.body.password) {
         ClientLogin
             .create(req.body)
