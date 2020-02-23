@@ -11,7 +11,7 @@ const Signup = () => {
 
     const addInfo = () => {
         if (userType === "vendor") {
-            axios.post('/api/vendorlogin', {
+            axios.post('/api/vendorsignup', {
                 businessName: businessName,
                 email: email,
                 password: password,
@@ -29,7 +29,7 @@ const Signup = () => {
                 .catch(err => console.log(err))
         }
         else {
-            axios.post('/api/clientlogin', {
+            axios.post('/api/clientsignup', {
                 email: email,
                 password: password,
                 userType: userType

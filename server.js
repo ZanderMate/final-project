@@ -3,7 +3,9 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./controllers/api');
-const bcrypt = require('bcrypt')
+const session = require('express-session');
+const flash = require('express-flash');
+const passport = require('passport');
 
 require('dotenv').config();
 
@@ -19,6 +21,15 @@ mongoose.connect(process.env.DB,
 app.use(logger('dev'));
 
 app.use(bodyParser.json());
+app.use(flash());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/api', routes);
 app.use((err, req, res, next) => {
     console.log(err);

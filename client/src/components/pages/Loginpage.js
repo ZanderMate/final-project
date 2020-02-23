@@ -27,7 +27,7 @@ const LoginPage = () => {
                         type="submit"
                         value="Log In"
                         className="btn btn-primary"
-                        onClick=""
+                    // onClick=""
                     />
                 </form>
             </Container>

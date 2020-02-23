@@ -1,10 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const VendorLogin = require('../models/vendorlogin');
 const ClientLogin = require('../models/clientlogin');
 const SaleItem = require('../models/items');
 const passport = require('passport');
+
+const intializePassPort = require('../config/passport-config');
+intializePassPort(
+    passport,
+    email => {
+        if (userType === 'vendor') {
+            VendorLogin.find(vendor => vendor.email === email)
+        } else if (userType === 'customer') {
+            ClientLogin.find(client => client.email === email)
+        }
+    },
+    _id => {
+        if (userType === 'vendor') {
+            VendorLogin.find(vendor => vendor._id === _id)
+        } else if (userType === 'customer') {
+            ClientLogin.find(client => client._id === _id)
+        }
+    }
+)
 
 //show what is in cart
 // router.get('/cart', (req, res, next) => {
@@ -14,12 +33,11 @@ const passport = require('passport');
 //         .catch(next)
 // });
 
-// router.get('/vendorlogin', (req, res, next) => {
-//         VendorLogin
-//             .find({})
-//             .then(data => res.json(data))
-//             .catch(next)
-//     });
+router.post('/vendorlogin', passport.authenticate('local', {
+    successRedirect: '/storefront',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
 
 //show all the sale items
 router.get('/sale-items', (req, res, next) => {
@@ -30,25 +48,45 @@ router.get('/sale-items', (req, res, next) => {
 });
 
 //add client info
-router.post('/clientlogin', async (req, res, next) => {
-    const hashedPasswordClient = await bcrypt.hash(req.body.password, 10)
-    if (req.body.email && hashedPasswordClient) {
-        ClientLogin
-            .create(req.body)
-            .then(result => res.json(result))
-            .catch(next);
+router.post('/clientsignup', async (req, res, next) => {
+    const { email, password, userType } = req.body;
+    if (email && password && userType) {
+        try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            ClientLogin
+                .create({
+                    email: email,
+                    password: hashedPassword,
+                    userType: userType
+                })
+            res.redirect('/login');
+        } catch {
+            res.redirect('/signup')
+        }
     }
-});
+    console.log("Signed up successfully!")
+})
 
 //add vendor login info
-router.post('/vendorlogin', async (req, res, next) => {
-    const hashedPasswordVendor = await bcrypt.hash(req.body.password, 10)
-    if (req.body.businessName && req.body.email && hashedPasswordVendor) {
-        VendorLogin
-            .create(req.body)
-            .then(result => res.json(result))
-            .catch(next);
+router.post('/vendorsignup', async (req, res, next) => {
+    //check that all required fields are filled
+    const { businessName, email, password, userType } = req.body;
+    if (businessName && email && password && userType) {
+        try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            VendorLogin
+                .create({
+                    businessName: businessName,
+                    email: email,
+                    password: hashedPassword,
+                    userType: userType
+                })
+            res.redirect('/login');
+        } catch {
+            res.redirect('/signup')
+        }
     }
+    console.log("Signed up successfully!")
 });
 
 //add to cart
