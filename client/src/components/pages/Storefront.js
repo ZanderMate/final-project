@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import VendorNavbar from '../VendorNavbar';
 
 const Storefront = () => {
     return (
         <div>
             <VendorNavbar />
-            <p>This is the storefront screen!</p>
+            <p>STOREFRONT SCEEN</p>
         </div>
     )
 }

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ClientNavbar from '../ClientNavbar';
 
 const Cart = () => {
     return (
         <div>
             <ClientNavbar />
-            <p>This is the cart screen!</p>
+            <p>CART SCREEN</p>
         </div>
     )
 }

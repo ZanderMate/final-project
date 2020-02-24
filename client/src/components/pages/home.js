@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from '../Container';
+import Container from '../Jumbotron';
 import { Link } from 'react-router-dom';
 
 const Home = () => {

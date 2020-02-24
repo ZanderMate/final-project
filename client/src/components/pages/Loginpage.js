@@ -1,6 +1,6 @@
 import React from "react";
 import NavTabs from "../navtabs";
-import Container from '../Container';
+import Container from '../Jumbotron';
 
 const LoginPage = () => {
     return (
