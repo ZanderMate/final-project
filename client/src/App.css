@@ -1,0 +1,15 @@
+h1 {
+    font-family: 'Vast Shadow';
+}
+
+.third {
+    min-width: 22%;
+    max-width: 23%;
+    min-height: 100px;
+    color: white;
+    background-color: darkgray;
+}
+
+.jumbotron {
+    background-color: lightblue;
+}

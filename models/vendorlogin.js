@@ -22,4 +22,8 @@ const VendorLoginSchema = new Schema({
 
 const VendorLogin = mongoose.model('vendorlogin', VendorLoginSchema);
 
+VendorLogin.prototype.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
 module.exports = VendorLogin;

@@ -18,13 +18,14 @@ const Signup = () => {
                 userType: userType
             })
                 .then(res => {
-                    if (res.data) {
-                        setBusinessName("");
-                        setEmail("");
-                        setPassword("");
-                        setUserType("customer");
-                        console.log("Added vendor to database!")
-                    }
+                    // if (res.data) {
+                    setBusinessName("");
+                    setEmail("");
+                    setPassword("");
+                    setUserType("customer");
+                    console.log("Added vendor to database!")
+                    window.location.href = "/login"
+                    // }
                 })
                 .catch(err => console.log(err))
         }
@@ -35,12 +36,17 @@ const Signup = () => {
                 userType: userType
             })
                 .then(res => {
-                    if (res.data) {
-                        setEmail("");
-                        setPassword("");
-                        setUserType("customer");
-                        console.log("Added client to database!")
-                    }
+                    console.log("test");
+                    console.log("here!!!");
+                    // if (res.data) {
+                    setEmail("");
+                    setPassword("");
+                    setUserType("customer");
+                    console.log("Added client to database!")
+                    console.log(res);
+                    // }
+                    //location redirect
+                    window.location.href = "/login";
                 })
                 .catch(err => console.log(err))
         }
@@ -60,26 +66,53 @@ const Signup = () => {
                 </div>
                 <br />
                 <br />
-                <h2 className="text-center">Sign Up for a Tigris Account!</h2>
+                <h1 className="text-center">Sign Up for a Tigris Account!</h1>
                 <br />
                 <div className="text-center">
                     <div style={{ display: userType === 'customer' ? 'none' : 'block' }}>
                         <p>Business Name</p>
-                        <input type="text" name="businessName" placeholder="Business Name" onChange={e => setBusinessName(e.target.value)} />
+                        <input
+                            type="text"
+                            name="businessName"
+                            value={businessName}
+                            placeholder="Business Name"
+                            onChange={e => setBusinessName(e.target.value)} />
                     </div>
                     <br />
                     <p>Email</p>
-                    <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} required />
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        onChange={e => setEmail(e.target.value)}
+                        required />
                     <br />
                     <br />
                     <p>Password</p>
-                    <input type="text" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
+                    <input
+                        type="text"
+                        name="password"
+                        placeholder="Password"
+                        onChange={e => setPassword(e.target.value)}
+                        required />
                     <br />
                     <br />
-                    <input type="radio" value="customer" name="userType" onChange={() => setUserType('customer')} onClick={() => setUserType('customer')} checked={userType === 'customer'} />
+                    <input
+                        type="radio"
+                        value="customer"
+                        name="userType"
+                        onChange={() => setUserType('customer')}
+                        onClick={() => setUserType('customer')}
+                        checked={userType === 'customer'} />
                     <label> Customer </label>
                     <br />
-                    <input type="radio" value="vendor" name="userType" onChange={() => setUserType('vendor')} onClick={() => setUserType('vendor')} checked={userType === 'vendor'} />
+                    <input
+                        type="radio"
+                        value="vendor"
+                        name="userType"
+                        onChange={() => setUserType('vendor')}
+                        onClick={() => setUserType('vendor')}
+                        checked={userType === 'vendor'} />
                     <label> Vendor </label>
                     <br />
                     <input

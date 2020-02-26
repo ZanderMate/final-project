@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LogInPage from './pages/Loginpage';
-import Home from './pages/home';
+import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Storefront from './pages/Storefront';
-import AddItem from './pages/additem'
+import AddItem from './pages/Add'
+import Search from './pages/Search'
+import Cart from './pages/Cart'
 
 
 const CommerceWrapper = () => {
@@ -15,7 +17,9 @@ const CommerceWrapper = () => {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={LogInPage} />
                 <Route path="/storefront/:businessName" component={Storefront} />
-                <Route path="/add-item/:businessName" component={AddItem} />
+                <Route path="/add/:businessName" component={AddItem} />
+                <Route exact path="/search" component={Search} />
+                <Route path="/cart/:email" component={Cart} />
             </Router>
         </div>
     )

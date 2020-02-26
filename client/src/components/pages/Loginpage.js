@@ -3,6 +3,12 @@ import NavTabs from "../navtabs";
 import Container from '../Jumbotron';
 
 const LoginPage = () => {
+
+    const LogIn = () => {
+        
+    }
+    
+
     return (
         <div>
             <NavTabs />
@@ -12,7 +18,7 @@ const LoginPage = () => {
                 </div>
                 <br />
                 <br />
-                <h2 className="text-center">Log In to your Tigris Account!</h2>
+                <h1 className="text-center">Log In to your Tigris Account!</h1>
                 <br />
                 <form method="post" className="text-center">
                     <p>Email</p>
@@ -27,7 +33,7 @@ const LoginPage = () => {
                         type="submit"
                         value="Log In"
                         className="btn btn-primary"
-                    // onClick=""
+                        onClick={LogIn}
                     />
                 </form>
             </Container>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const Schema = mongoose.Schema;
 const ClientLoginSchema = new Schema({
@@ -14,8 +15,12 @@ const ClientLoginSchema = new Schema({
         type: String,
         required: [true, 'The field is required']
     }
-})
+});
 
 const ClientLogin = mongoose.model('clientlogin', ClientLoginSchema);
+
+ClientLogin.prototype.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = ClientLogin;

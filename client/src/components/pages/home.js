@@ -10,7 +10,7 @@ const Home = () => {
             </div>
             <br />
             <br />
-            <h2 className="text-center">Welcome to Tigris Shopping!</h2>
+            <h1 className="text-center">Welcome to Tigris Shopping!</h1>
             <br />
             <div className="text-center">
                 <Link to="/signup" className="btn btn-primary">Sign-Up</Link>

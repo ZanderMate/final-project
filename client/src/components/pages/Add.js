@@ -1,25 +1,45 @@
 import React, { useState } from 'react';
 import VendorNavbar from '../VendorNavbar';
 import Container from '../Jumbotron';
+import CardInfo from '../CardInfo'
 const ScryfallClient = require('scryfall-client')
 const scryfall = new ScryfallClient()
 
+
 const AddItems = () => {
-    const [imgSrc, setImgSrc] = useState('');
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [color, setColor] = useState('');
+    const [results, setResults] = useState('');
 
     const searchCards = () => {
+        let query = '';
+        if (name) {
+            query = query + name;
+        }
+        if (type) {
+            query = query + " t:" + type;
+        }
+        if (color) {
+            query = query + " c:" + color;
+        }
+
         scryfall.get('cards/search', {
-            q: `${name} t:${type} c:${color}` //need to make t: and c: optional if no type or color 
-        }).then(list => {
-            const names = list.map(function(card) {
-                return card
-            })
-            console.log(names);
-            //I need to grab name of card, normal-size image, type_line
+            q: query.trim() //need to make t: and c: optional if no type or color 
+        }).then(_results => {
+
+            console.log(query)
+
+            setResults(_results)
         })
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        searchCards();
+        setColor('');
+        setName('');
+        setType('');
     }
 
     return (
@@ -34,6 +54,7 @@ const AddItems = () => {
                     <input
                         type="text"
                         name="card-name"
+                        value={name}
                         placeholder="Card Name"
                         onChange={e => setName(e.target.value)}
                     />
@@ -43,6 +64,7 @@ const AddItems = () => {
                     <input
                         type="text"
                         name="card-type"
+                        value={type}
                         placeholder="Card Type"
                         onChange={e => setType(e.target.value)}
                     />
@@ -52,6 +74,7 @@ const AddItems = () => {
                     <input
                         type="text"
                         name="card-color"
+                        value={color}
                         placeholder="Card Color"
                         onChange={e => setColor(e.target.value)}
                     />
@@ -61,10 +84,13 @@ const AddItems = () => {
                         type="submit"
                         value="Search"
                         className="btn btn-primary"
-                        onClick={searchCards}
+                        onClick={handleFormSubmit}
                     />
                 </div>
             </Container>
+            <CardInfo
+                results={results}
+            />
         </div>
     )
 }

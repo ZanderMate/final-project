@@ -6,25 +6,6 @@ const ClientLogin = require('../models/clientlogin');
 const SaleItem = require('../models/items');
 const passport = require('passport');
 
-const intializePassPort = require('../config/passport-config');
-intializePassPort(
-    passport,
-    email => {
-        if (userType === 'vendor') {
-            VendorLogin.find(vendor => vendor.email === email)
-        } else if (userType === 'customer') {
-            ClientLogin.find(client => client.email === email)
-        }
-    },
-    _id => {
-        if (userType === 'vendor') {
-            VendorLogin.find(vendor => vendor._id === _id)
-        } else if (userType === 'customer') {
-            ClientLogin.find(client => client._id === _id)
-        }
-    }
-)
-
 //show what is in cart
 // router.get('/cart', (req, res, next) => {
 //     Cart
@@ -33,14 +14,26 @@ intializePassPort(
 //         .catch(next)
 // });
 
-router.post('/vendorlogin', passport.authenticate('local', {
-    successRedirect: '/storefront',
-    failureRedirect: '/login',
-    failureFlash: true
+router.post('/vendorlogin', passport.authenticate('local', function (req, res) {
+    res.json(req.user);
+    window.location.href("/storefront/:businessName")
+}))
+
+router.post('/clientlogin', passport.authenticate('local', function (req, res) {
+    res.json(req.user);
+    window.location.href("/search")
 }))
 
 //show all the sale items
-router.get('/sale-items', (req, res, next) => {
+router.get('/items/:businessName', (req, res, next) => {
+    console.log('Params: ' + req.params)
+    SaleItem
+        .find({ vendor: req.params })
+        .then(data => res.json(data))
+        .catch(next)
+});
+
+router.get('/items', (req, res, next) => {
     SaleItem
         .find()
         .then(data => res.json(data))
@@ -49,6 +42,7 @@ router.get('/sale-items', (req, res, next) => {
 
 //add client info
 router.post('/clientsignup', async (req, res, next) => {
+    console.log(req.body);
     const { email, password, userType } = req.body;
     if (email && password && userType) {
         try {
@@ -59,9 +53,10 @@ router.post('/clientsignup', async (req, res, next) => {
                     password: hashedPassword,
                     userType: userType
                 })
-            res.redirect('/login');
-        } catch {
-            res.redirect('/signup')
+            res.send("login")
+            // res.redirect('/login');
+        } catch (err) {
+            console.log(err);
         }
     }
     console.log("Signed up successfully!")
@@ -81,7 +76,7 @@ router.post('/vendorsignup', async (req, res, next) => {
                     password: hashedPassword,
                     userType: userType
                 })
-            res.redirect('/login');
+            res.status(400)
         } catch {
             res.redirect('/signup')
         }
@@ -90,7 +85,7 @@ router.post('/vendorsignup', async (req, res, next) => {
 });
 
 //add to cart
-// router.post('/cart', (req, res, next) => {
+// router.post('/cart/:email', (req, res, next) => {
 //     if (req.body.item) {
 //         Cart
 //             .create(req.body)
@@ -103,8 +98,9 @@ router.post('/vendorsignup', async (req, res, next) => {
 // });
 
 //add to sale items
-router.post('/sale-items', (req, res, next) => {
-    if (req.body.name && req.body.price && req.body.imgsource) {
+router.post('/items', (req, res, next) => {
+    const { cardName, price, imgsource, type_line, vendor } = req.body;
+    if (cardName && price && imgsource && type_line) {
         SaleItem
             .create(req.body)
             .then(data => res.json(data))

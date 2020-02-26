@@ -1,24 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const SaleItemSchema = new Schema({
-    name: {
+    cardName: {
         type: String,
-        required: [true, 'The text field is required']
+        required: [true, 'The field is required']
     },
     price: {
-        type: Number,
-        required: [true, 'The text field is required']
+        type: String,
+        required: [true, 'The field is required']
     },
-    sold: {
-        type: Boolean,
-        default: false
+    type_line: {
+        type: String,
+        required: [true, 'The field is required']
     },
     imgsource: {
         type: String
     },
     vendor: {
         type: String,
-        required: [true, 'The text field is required']
+        required: [true, 'The field is required']
     }
 })
 
