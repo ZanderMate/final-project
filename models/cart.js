@@ -6,13 +6,12 @@ const CartSchema = new Schema({
 		required: [true, 'The text field is required'] 
     },
     price: {
-        type: Number,
+        type: String,
         required: [true, 'The text field is required']
     },
-    sold: {
-        type: Boolean,
+    email: {
+        type: String,
         require: [true, 'Field is required'],
-        default: false
     }
 })
 

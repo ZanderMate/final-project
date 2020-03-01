@@ -6,11 +6,13 @@ const ScryfallClient = require('scryfall-client')
 const scryfall = new ScryfallClient()
 
 
-const AddItems = () => {
+const AddItems = (props) => {
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [color, setColor] = useState('');
     const [results, setResults] = useState('');
+    const [vendor, setVendor] = useState(props.match.params.businessName);
+    console.log(props.match.params.businessName)
 
     const searchCards = () => {
         let query = '';
@@ -25,7 +27,7 @@ const AddItems = () => {
         }
 
         scryfall.get('cards/search', {
-            q: query.trim() //need to make t: and c: optional if no type or color 
+            q: query.trim()
         }).then(_results => {
 
             console.log(query)
@@ -90,6 +92,7 @@ const AddItems = () => {
             </Container>
             <CardInfo
                 results={results}
+                vendor={vendor}
             />
         </div>
     )

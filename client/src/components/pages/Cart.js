@@ -11,6 +11,7 @@ class Cart extends Component {
 
     componentDidMount() {
         const { email } = this.props.match.params
+        console.log(email);
         axios.get(`/api/cart/${email}`)
             .then((data) => { console.log(data) })
     }

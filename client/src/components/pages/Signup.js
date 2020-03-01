@@ -2,55 +2,34 @@ import React, { useState } from 'react';
 import Container from '../Jumbotron';
 import NavTabs from '../navtabs';
 import axios from 'axios';
+const bcrypt = require('bcryptjs');
 
 const Signup = () => {
-    const [businessName, setBusinessName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [businessName, setBusinessName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [userType, setUserType] = useState("customer");
 
     const addInfo = () => {
-        if (userType === "vendor") {
-            axios.post('/api/vendorsignup', {
-                businessName: businessName,
-                email: email,
-                password: password,
-                userType: userType
+        var salt = bcrypt.genSaltSync(10);
+        var hashPassword = bcrypt.hashSync(password, salt);
+        axios.post('/api/signup', {
+            businessName: businessName,
+            email: email,
+            password: hashPassword,
+            userType: userType,
+            urlName: encodeURI(businessName)
+        })
+            .then(res => {
+                setBusinessName("");
+                setEmail("");
+                setPassword("");
+                setUserType("customer");
+                console.log("Added vendor to database!")
+                window.location.href = "/login"
             })
-                .then(res => {
-                    // if (res.data) {
-                    setBusinessName("");
-                    setEmail("");
-                    setPassword("");
-                    setUserType("customer");
-                    console.log("Added vendor to database!")
-                    window.location.href = "/login"
-                    // }
-                })
-                .catch(err => console.log(err))
-        }
-        else {
-            axios.post('/api/clientsignup', {
-                email: email,
-                password: password,
-                userType: userType
-            })
-                .then(res => {
-                    console.log("test");
-                    console.log("here!!!");
-                    // if (res.data) {
-                    setEmail("");
-                    setPassword("");
-                    setUserType("customer");
-                    console.log("Added client to database!")
-                    console.log(res);
-                    // }
-                    //location redirect
-                    window.location.href = "/login";
-                })
-                .catch(err => console.log(err))
-        }
-    };
+            .catch(err => console.log(err))
+    }
 
     const handleFormSubmit = e => {
         e.preventDefault();

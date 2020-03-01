@@ -6,7 +6,6 @@ const routes = require('./controllers/api');
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
-const methodOverride = require('method-override');
 
 require('dotenv').config();
 
@@ -20,18 +19,34 @@ mongoose.connect(process.env.DB,
     );
 
 app.use(logger('dev'));
-
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+)
 app.use(bodyParser.json());
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 2628000000 }
+    // store: new session({
+    //     storage: 'mongodb',
+    //     instance: 'mongoose'
+    // })
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+app.use((req, res, next) => {
+    console.log('req.session', req.session);
+    return next();
+});
 
 app.use('/api', routes);
+
 app.use((err, req, res, next) => {
     console.log(err);
     res.header("Access-Control-Allow-Origin", "*");

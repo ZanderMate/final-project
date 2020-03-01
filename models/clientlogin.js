@@ -14,6 +14,10 @@ const ClientLoginSchema = new Schema({
     userType: {
         type: String,
         required: [true, 'The field is required']
+    },
+    urlEmail: {
+        type: String,
+        required: [true, 'The field is required']
     }
 });
 

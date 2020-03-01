@@ -19,6 +19,13 @@ export default class ShowCards extends Component {
             })
     }
 
+    addToCart() {
+        axios.post('/api/cart/:email')
+            .then(result => {
+                console.log('added to cart!')
+            })
+    }
+
     render() {
         return (
             <div>
@@ -34,7 +41,8 @@ export default class ShowCards extends Component {
                                     <button
                                         type="submit"
                                         value={result.cardName}
-                                        className="btn btn-primary">
+                                        className="btn btn-primary"
+                                        onClick={this.addToCart}>
                                         Add to Cart
                                     </button>
                                 </div>

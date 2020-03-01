@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import LogInPage from './pages/Loginpage';
+import LoginForm from './pages/Loginpage';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Storefront from './pages/Storefront';
@@ -15,7 +15,7 @@ const CommerceWrapper = () => {
             <Router>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/signup" component={Signup} />
-                <Route exact path="/login" component={LogInPage} />
+                <Route exact path="/login" component={LoginForm} />
                 <Route path="/storefront/:businessName" component={Storefront} />
                 <Route path="/add/:businessName" component={AddItem} />
                 <Route exact path="/search" component={Search} />
