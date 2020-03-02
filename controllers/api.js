@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const Cart = require('../models/cart')
-const VendorLogin = require('../models/vendorlogin');
-const ClientLogin = require('../models/clientlogin');
+const User = require('../models/UserLogin');
 const SaleItem = require('../models/items');
-const passport = require('passport');
+const jwt = require('jsonwebtoken')
 
 
 //show what is in cart
@@ -17,15 +16,42 @@ const passport = require('passport');
 // });
 
 router.post('/login', function (req, res, next) {
+    const email = req.body.email;
+    const password = req.body.password;
 
-    console.log("Body: " + req.body);
-
-
-    console.log('routes/vendorlogin.js, login, req.body: ');
-    console.log(req.body)
-    res.send("hi");
-}   
-)
+    User.findOne({ email }).then(user => {
+        if (!user) {
+            return res.status(404).json({ emailnotfound: "Email not found" });
+        }
+        bcrypt.compare(password, user.password).then(isMatch => {
+            if (isMatch) {
+                const payload = {
+                    id: user._id,
+                    email: user.email
+                };
+                jwt.sign(
+                    payload,
+                    keys.secretOrKey,
+                    {
+                        expiresIn: 31556926
+                    },
+                    (err, token) => {
+                        res.json({
+                            success: true,
+                            token: "Bearer " + token
+                        })
+                    }
+                )
+            } else {
+                return res
+                    .status(400)
+                    .json({ passwordincorrect: "Password incorrect" })
+            }
+            // Some kind of if statement for where to
+            // route depending on userType from User model
+        })
+    })
+})
 
 // router.post('/clientlogin', passport.authenticate('local', function (req, res) {
 //     res.json(req.user);
@@ -51,10 +77,10 @@ router.get('/items', (req, res, next) => {
 //add vendor login info
 router.post('/signup', (req, res, next) => {
     //check that all required fields are filled
-    const { businessName, email, password, userType, urlName } = req.body;
+    const { businessName, email, password, userType } = req.body;
     console.log(req.body);
-    if (businessName && email && password && userType && urlName) {
-        VendorLogin
+    if (email && password && userType) {
+        User
             .create({
                 businessName: businessName,
                 email: email,

@@ -3,8 +3,8 @@ const bcrypt = require('bcryptjs');
 mongoose.promise = Promise
 
 const Schema = mongoose.Schema;
-const VendorSchema = new Schema({
-    businessName: { type: String, required: [true, 'The field is required'] },
+const UserSchema = new Schema({
+    businessName: { type: String},
     email: { type: String, required: [true, 'The field is required'] },
     password: { type: String, required: [true, 'The field is required'] },
     userType: { type: String, required: [true, 'The field is required'] },
@@ -12,7 +12,7 @@ const VendorSchema = new Schema({
 })
 
 
-VendorSchema.methods = {
+UserSchema.methods = {
     checkPassword: function (inputPassword) {
         return bcrypt.compareSync(inputPassword, this.password)
     },
@@ -21,7 +21,7 @@ VendorSchema.methods = {
     }
 }
 
-// VendorSchema.pre('save', function (next) {  //this is stopping me from posting vendor sign up info into database
+// UserSchema.pre('save', function (next) {  //this is stopping me from posting vendor sign up info into database
 //     if (!this.password) {
 //         console.log('models/vendorlogin.js ========NO PASSWORD PROVIDED=======')
 //         next()
@@ -32,6 +32,6 @@ VendorSchema.methods = {
 //     }
 // })
 
-const Vendor = mongoose.model('vendorlogin', VendorSchema);
+const User = mongoose.model('userlogin', UserSchema);
 
-module.exports = Vendor;
+module.exports = User;
