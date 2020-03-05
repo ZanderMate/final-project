@@ -16,10 +16,10 @@ const CommerceWrapper = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={LoginForm} />
-                <Route path="/storefront/:businessName" component={Storefront} />
-                <Route path="/add/:businessName" component={AddItem} />
+                <Route path="/storefront" component={Storefront} />
+                <Route path="/add" component={AddItem} />
                 <Route exact path="/search" component={Search} />
-                <Route path="/cart/:email" component={Cart} />
+                <Route path="/cart" component={Cart} />
             </Router>
         </div>
     )

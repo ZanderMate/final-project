@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import NavTabs from '../navtabs'
 import Container from '../Jumbotron'
@@ -24,6 +23,20 @@ class LoginForm extends Component {
         axios.post('/api/login', {
                 email: this.state.email,
                 password: this.state.password
+            }).then(({data})=>{
+               
+                localStorage.setItem('store', JSON.stringify(data));
+                
+                if (data.userType==="vendor"){
+                    //Vendor
+
+                    window.location.href = '/storefront/' + data.urlName;
+                    
+                }
+                else{
+                    // customer
+                    window.location.href  = '/search';
+                }
             })
     }
 
@@ -66,6 +79,7 @@ class LoginForm extends Component {
                                 onChange={this.handleChange}
                             />
                         </div>
+                        <br/>
                         <div className="col-7"></div>
                         <button
                             className="btn btn-primary col-1 col-mr-auto"

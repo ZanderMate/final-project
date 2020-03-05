@@ -2,18 +2,23 @@ import React from "react";
 const axios = require('axios');
 
 function CardInfo(props) {
+
     console.log(props);
+    const storeData = JSON.parse(localStorage.getItem("store"));
+
     const handleSubmit = (event) => {
         let name;
         let price;
         let imgsource;
         let typeLine;
+        let vendor;
         for (var i = 0; i < props.results.length; i++) {
             if (props.results[i].name === event.target.name) {
                 name = props.results[i].name;
                 price = props.results[i].prices.usd;
                 imgsource = props.results[i].image_uris.normal;
                 typeLine = props.results[i].type_line
+                vendor = storeData.businessName
             }
         }
         axios.post('/api/items', {
@@ -21,10 +26,10 @@ function CardInfo(props) {
             price: price,
             imgsource: imgsource,
             type_line: typeLine,
-            vendor: props.vendor
+            vendor: vendor
         }).then(res => {
             console.log("Added item successfully!")
-            console.log("vendor: " + props.vendor)
+            console.log("vendor: " + vendor)
         })
     }
 

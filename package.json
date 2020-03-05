@@ -34,7 +34,6 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
-    "method-override": "^3.0.0",
     "mongoose": "^5.8.10",
     "morgan": "^1.9.1",
     "mtg-card-viewer": "^0.1.5",

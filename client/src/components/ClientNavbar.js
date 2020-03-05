@@ -5,7 +5,7 @@ const ClientNavbar = () => {
     return (
         <ul className="nav nav-tabs">
             <li className="nav-item">
-                <Link to="/item-search" className={window.location.pathname === "/item-search" ? "nav-link active" : "nav-link"}>
+                <Link to="/search" className={window.location.pathname === "/search" ? "nav-link active" : "nav-link"}>
                     Item Search
                 </Link>
             </li>

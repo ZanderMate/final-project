@@ -6,14 +6,29 @@ const axios = require('axios');
 class Cart extends Component {
     state = {
         email: this.props.match.params.email,
-        data: ""
+        data: "",
+        storeData: JSON.parse(localStorage.getItem("store"))
+    }
+
+    buyCard(e) {
+        const id = e.target.id
+        axios.delete(`/api/cart/${id}`)
+            .then(
+                axios.delete(`/api/items/${id}`)
+                .then(result => {
+                    console.log("You bought an item!")
+                })
+            )
     }
 
     componentDidMount() {
-        const { email } = this.props.match.params
+        const email = this.state.storeData.email
         console.log(email);
         axios.get(`/api/cart/${email}`)
-            .then((data) => { console.log(data) })
+            .then((results) => {
+                console.log(results.data);
+                this.setState({ data: results.data })
+            })
     }
 
     render() {
@@ -21,25 +36,24 @@ class Cart extends Component {
             <div>
                 <ClientNavbar />
                 <Container>
-                    <h1 className="text-center">{this.state.email.toUpperCase()}'S CART</h1>
+                    <h1 className="text-center">{this.state.storeData.email.toUpperCase()}'S CART</h1>
                 </Container>
                 <div>
                     {this.state.data.length > 0 ? (
-                        <div className="card-deck">
+                        <div className="list-group">
                             {this.state.data.map((result) => (
-                                <div className="card third">
-                                    <img className="card-img-top" src={result.imgsource} alt="mtg card" />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{result.cardName}</h5>
-                                        <p className="card-text">{result.type_line}</p>
-                                        <p className="card-text">${result.price}</p>
+                                <div className="list-group-item" key={this.state.storeData._id}>
+                                    <p><b>{result.name}</b> ${result.price}
                                         <button
                                             type="submit"
                                             value={result.cardName}
-                                            className="btn btn-primary">
-                                            Add to Cart
+                                            className="btn btn-primary"
+                                            onClick={this.buyCard}
+                                            id={result._id}
+                                        >
+                                            Buy!
                                     </button>
-                                    </div>
+                                    </p>
                                 </div>
                             ))}
                         </div>

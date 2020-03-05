@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const CartSchema = new Schema({ 
-	name: { 
-		type: String, 
-		required: [true, 'The text field is required'] 
+const CartSchema = new Schema({
+    name: {
+        type: String,
+        required: [true, 'The text field is required']
     },
     price: {
         type: String,
         required: [true, 'The text field is required']
     },
-    email: {
+    image: {
+        type: String,
+        require: [true, 'Field is required'],
+    },
+    id: {
         type: String,
         require: [true, 'Field is required'],
     }
