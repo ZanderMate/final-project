@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from '../Jumbotron';
+import Jumbotron from '../Jumbotron';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
-        <Container>
+        <Jumbotron>
             <div className="text-center">
                 <img src="./assets/images/placeholder-logo.png" alt="placeholder logo" />
             </div>
@@ -20,7 +20,7 @@ const Home = () => {
                 <Link to="/login" className="btn btn-primary">Log-In</Link>
             </div>
             <br />
-        </Container>
+        </Jumbotron>
     )
 }
 

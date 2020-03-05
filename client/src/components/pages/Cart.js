@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import ClientNavbar from '../ClientNavbar';
-import Container from '../Jumbotron';
+import Jumbotron from '../Jumbotron';
+import Container from '../Container';
 const axios = require('axios');
 
 class Cart extends Component {
     state = {
-        email: this.props.match.params.email,
         data: "",
         storeData: JSON.parse(localStorage.getItem("store"))
     }
 
     buyCard(e) {
         const id = e.target.id
+        console.log(id);
         axios.delete(`/api/cart/${id}`)
             .then(
                 axios.delete(`/api/items/${id}`)
-                .then(result => {
-                    console.log("You bought an item!")
-                })
+                    .then(result => {
+                        console.log("You bought an item!")
+                        window.location.reload();
+                    })
             )
     }
 
@@ -35,33 +37,47 @@ class Cart extends Component {
         return (
             <div>
                 <ClientNavbar />
-                <Container>
+                <Jumbotron>
                     <h1 className="text-center">{this.state.storeData.email.toUpperCase()}'S CART</h1>
+                </Jumbotron>
+                <Container>
+                    <div>
+                        {this.state.data.length > 0 ? (
+                            <table className="table">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th scope="col">Card Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">To Buy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.data.map((result) => (
+
+                                        <tr key={result._id}>
+                                            <td>{result.name}</td>
+                                            <td>{result.price}</td>
+                                            <td>
+                                                <button
+                                                    type="submit"
+                                                    value={result.name}
+                                                    className="btn btn-primary"
+                                                    onClick={this.buyCard}
+                                                    id={result.id}
+                                                >
+                                                    Buy!
+                                            </button>
+                                            </td>
+                                        </tr>
+
+                                    ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                                <h2 className="text-center">Nothing in Cart</h2>
+                            )}
+                    </div>
                 </Container>
-                <div>
-                    {this.state.data.length > 0 ? (
-                        <div className="list-group">
-                            {this.state.data.map((result) => (
-                                <div className="list-group-item" key={this.state.storeData._id}>
-                                    <p><b>{result.name}</b> ${result.price}
-                                        <button
-                                            type="submit"
-                                            value={result.cardName}
-                                            className="btn btn-primary"
-                                            onClick={this.buyCard}
-                                            id={result._id}
-                                        >
-                                            Buy!
-                                    </button>
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                            <h2 className="text-center">Nothing in Cart</h2>
-                        )
-                    }
-                </div>
             </div>
         )
     }

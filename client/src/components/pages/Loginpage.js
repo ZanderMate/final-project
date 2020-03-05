@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import NavTabs from '../navtabs'
-import Container from '../Jumbotron'
+import Jumbotron from '../Jumbotron'
 
 class LoginForm extends Component {
-
     state = {
-        email:"",
-        password:""
+        email: "",
+        password: ""
     }
 
 
-    handleChange = (event) =>{
+    handleChange = (event) => {
         console.log(event.target)
         this.setState({
             [event.target.name]: event.target.value
@@ -21,30 +20,30 @@ class LoginForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         axios.post('/api/login', {
-                email: this.state.email,
-                password: this.state.password
-            }).then(({data})=>{
-               
-                localStorage.setItem('store', JSON.stringify(data));
-                
-                if (data.userType==="vendor"){
-                    //Vendor
+            email: this.state.email,
+            password: this.state.password
+        }).then(({ data }) => {
 
-                    window.location.href = '/storefront/' + data.urlName;
-                    
-                }
-                else{
-                    // customer
-                    window.location.href  = '/search';
-                }
-            })
+            localStorage.setItem('store', JSON.stringify(data));
+
+            if (data.userType === "vendor") {
+                //Vendor
+
+                window.location.href = '/storefront/' + data.urlName;
+
+            }
+            else if (data.userType === 'customer') {
+                // customer
+                window.location.href = '/search';
+            }
+        })
     }
 
     render() {
         return (
             <div>
                 <NavTabs />
-                <Container>
+                <Jumbotron>
                     <div className="text-center">
                         <img src="./assets/images/placeholder-logo.png" alt="placeholder logo" />
                     </div>
@@ -79,7 +78,7 @@ class LoginForm extends Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-                        <br/>
+                        <br />
                         <div className="col-7"></div>
                         <button
                             className="btn btn-primary col-1 col-mr-auto"
@@ -87,7 +86,7 @@ class LoginForm extends Component {
                             onClick={this.handleSubmit}
                             type="submit">Login</button>
                     </form>
-                </Container>
+                </Jumbotron>
             </div>
         )
     }

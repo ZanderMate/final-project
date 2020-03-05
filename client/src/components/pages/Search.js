@@ -1,15 +1,15 @@
 import React from 'react';
 import ClientNavbar from '../ClientNavbar'
-import Container from '../Jumbotron';
+import Jumbotron from '../Jumbotron';
 import ShowCards from '../ShowCards';
 
 const Search = () => {
     return (
         <div className="text-center">
             <ClientNavbar />
-            <Container>
+            <Jumbotron>
                 <h1>CARD SEARCH</h1>
-            </Container>
+            </Jumbotron>
             <ShowCards />
         </div >
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VendorNavbar from '../VendorNavbar';
-import Container from '../Jumbotron'
+import Jumbotron from '../Jumbotron'
 import axios from 'axios';
 
 
@@ -27,15 +27,14 @@ export default class Storefront extends Component {
 
 
     render() {
-
         return (
             <div>
                 <VendorNavbar />
-                <Container>
+                <Jumbotron>
                     <h1 className="text-center">{this.state.storeData.businessName.toUpperCase()}'S STOREFRONT</h1>
                     <br />
                     <br />
-                </Container>
+                </Jumbotron>
                 <h3><b><u>Items to Sell:</u></b></h3>
                 <div>
                     {this.state.items.length > 0 ? (

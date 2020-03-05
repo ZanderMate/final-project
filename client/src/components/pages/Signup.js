@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Container from '../Jumbotron';
+import Jumbotron from '../Jumbotron';
 import NavTabs from '../navtabs';
 import axios from 'axios';
 const bcrypt = require('bcryptjs');
@@ -39,7 +39,7 @@ const Signup = () => {
     return (
         <div>
             <NavTabs />
-            <Container>
+            <Jumbotron>
                 <div className="text-center">
                     <img src="./assets/images/placeholder-logo.png" alt="placeholder logo" />
                 </div>
@@ -101,7 +101,7 @@ const Signup = () => {
                         onClick={handleFormSubmit}
                     />
                 </div>
-            </Container >
+            </Jumbotron>
         </div >
     )
 }

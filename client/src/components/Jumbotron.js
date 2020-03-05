@@ -1,7 +1,7 @@
 import React from "react";
 
-function Container({ children }) {
+function Jumbotron({ children }) {
   return <div className="jumbotron">{children}</div>;
 }
 
-export default Container;
+export default Jumbotron;
