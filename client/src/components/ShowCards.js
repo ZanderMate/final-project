@@ -42,6 +42,7 @@ class ShowCards extends Component {
         })
             .then(result => {
                 console.log('added to cart!')
+                window.location.href = '/cart';
             })
     }
 

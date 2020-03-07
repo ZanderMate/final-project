@@ -47,8 +47,8 @@ const AddItems = () => {
         <div>
             <VendorNavbar />
             <Jumbotron>
-                <h1 className="text-center">{storeData.businessName.toUpperCase()} Add Item to Inventory</h1>
-                <br />
+                <h1 className="text-center">{storeData.businessName.toUpperCase()}</h1>
+                <h2 className="text-center" style={{lineHeight: 1.5}}>Add Item to Inventory</h2>
                 <br />
                 <div className="text-center">
                     <p>Card Name:</p>

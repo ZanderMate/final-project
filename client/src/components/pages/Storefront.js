@@ -38,9 +38,9 @@ export default class Storefront extends Component {
                 <h3><b><u>Items to Sell:</u></b></h3>
                 <div>
                     {this.state.items.length > 0 ? (
-                        <div className="card-deck">
+                        <div className="card-deck justify-content-center">
                             {this.state.items.map((result) => (
-                                <div className="card text-center" key={result._id}>
+                                <div className="card third col-3 text-center" key={result._id}>
                                     <img className="card-img-top image-card third" src={result.imgsource} alt="mtg card" />
                                     <div className="card-body">
                                         <h5 className="card-title">{result.cardName}</h5>

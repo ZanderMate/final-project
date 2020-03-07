@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ClientNavbar from '../ClientNavbar';
+import VendorNavbar from '../VendorNavbar'
 import Jumbotron from '../Jumbotron';
 import Container from '../Container';
+import { MtgCardViewer } from 'mtg-card-viewer';
 const axios = require('axios');
 
 class Cart extends Component {
@@ -36,7 +38,11 @@ class Cart extends Component {
     render() {
         return (
             <div>
-                <ClientNavbar />
+                {this.state.storeData.userType === "customer" ? (
+                    <ClientNavbar />
+                ) : (
+                        <VendorNavbar />
+                    )}
                 <Jumbotron>
                     <h1 className="text-center">{this.state.storeData.email.toUpperCase()}'S CART</h1>
                 </Jumbotron>
@@ -55,7 +61,7 @@ class Cart extends Component {
                                     {this.state.data.map((result) => (
 
                                         <tr key={result._id}>
-                                            <td>{result.name}</td>
+                                            <td><MtgCardViewer searchTerm={result.name} /></td>
                                             <td>{result.price}</td>
                                             <td>
                                                 <button
