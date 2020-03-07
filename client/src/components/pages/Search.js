@@ -3,6 +3,8 @@ import ClientNavbar from '../ClientNavbar';
 import VendorNavbar from '../VendorNavbar';
 import Jumbotron from '../Jumbotron';
 import ShowCards from '../ShowCards';
+import Footer from '../Footer';
+import Container from '../Container';
 
 const Search = () => {
     const [storeData, setStoreData] = useState(JSON.parse(localStorage.getItem("store")))
@@ -17,7 +19,10 @@ const Search = () => {
             <Jumbotron>
                 <h1>CARD SEARCH</h1>
             </Jumbotron>
-            <ShowCards />
+            <Container>
+                <ShowCards />
+            </Container>
+            <Footer />
         </div >
     )
 }

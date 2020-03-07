@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import VendorNavbar from '../VendorNavbar';
 import CardInfo from '../CardInfo'
 import Jumbotron from '../Jumbotron';
+import Footer from '../Footer';
+import Container from '../Container';
 const ScryfallClient = require('scryfall-client')
 const scryfall = new ScryfallClient()
 
@@ -48,7 +50,7 @@ const AddItems = () => {
             <VendorNavbar />
             <Jumbotron>
                 <h1 className="text-center">{storeData.businessName.toUpperCase()}</h1>
-                <h2 className="text-center" style={{lineHeight: 1.5}}>Add Item to Inventory</h2>
+                <h2 className="text-center" style={{ lineHeight: 1.5 }}>Add Item to Inventory</h2>
                 <br />
                 <div className="text-center">
                     <p>Card Name:</p>
@@ -84,15 +86,18 @@ const AddItems = () => {
                     <input
                         type="submit"
                         value="Search"
-                        className="btn btn-primary"
+                        className="btn"
                         onClick={handleFormSubmit}
                     />
                 </div>
             </Jumbotron>
-            <CardInfo
-                results={results}
-                vendor={vendor}
-            />
+            <Container>
+                <CardInfo
+                    results={results}
+                    vendor={vendor}
+                />
+            </Container>
+            <Footer />
         </div>
     )
 }

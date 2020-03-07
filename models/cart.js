@@ -6,7 +6,7 @@ const CartSchema = new Schema({
         required: [true, 'The text field is required']
     },
     price: {
-        type: String,
+        type: Number,
         required: [true, 'The text field is required']
     },
     image: {

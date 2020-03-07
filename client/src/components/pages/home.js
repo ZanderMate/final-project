@@ -13,11 +13,11 @@ const Home = () => {
             <h1 className="text-center">Welcome to Tigris Shopping!</h1>
             <br />
             <div className="text-center">
-                <Link to="/signup" className="btn btn-primary">Sign-Up</Link>
+                <Link to="/signup" className="btn">Sign-Up</Link>
             </div>
             <br />
             <div className="text-center">
-                <Link to="/login" className="btn btn-primary">Log-In</Link>
+                <Link to="/login" className="btn">Log-In</Link>
             </div>
             <br />
         </Jumbotron>

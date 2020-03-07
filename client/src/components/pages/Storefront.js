@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import VendorNavbar from '../VendorNavbar';
-import Jumbotron from '../Jumbotron'
+import Jumbotron from '../Jumbotron';
+import Footer from '../Footer';
+import Container from '../Container';
 import axios from 'axios';
 
 
@@ -35,25 +37,28 @@ export default class Storefront extends Component {
                     <br />
                     <br />
                 </Jumbotron>
-                <h3><b><u>Items to Sell:</u></b></h3>
-                <div>
-                    {this.state.items.length > 0 ? (
-                        <div className="card-deck justify-content-center">
-                            {this.state.items.map((result) => (
-                                <div className="card third col-3 text-center" key={result._id}>
-                                    <img className="card-img-top image-card third" src={result.imgsource} alt="mtg card" />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{result.cardName}</h5>
-                                        <p className="card-text">{result.type_line}</p>
-                                        <p className="card-text">${result.price}</p>
+                <Container>
+                    <h3><b><u>Items to Sell:</u></b></h3>
+                    <div>
+                        {this.state.items.length > 0 ? (
+                            <div className="card-deck justify-content-center">
+                                {this.state.items.map((result) => (
+                                    <div className="card third col-3 text-center" key={result._id}>
+                                        <img className="card-img-top image-card third" src={result.imgsource} alt="mtg card" />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{result.cardName}</h5>
+                                            <p className="card-text">{result.type_line}</p>
+                                            <p className="card-text">${result.price}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                            <h2>Nothing to Sell</h2>
-                        )}
-                </div>
+                                ))}
+                            </div>
+                        ) : (
+                                <h2>Nothing to Sell</h2>
+                            )}
+                    </div>
+                </Container>
+                <Footer />
             </div >
         )
     }

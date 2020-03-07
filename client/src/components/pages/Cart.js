@@ -4,6 +4,7 @@ import VendorNavbar from '../VendorNavbar'
 import Jumbotron from '../Jumbotron';
 import Container from '../Container';
 import { MtgCardViewer } from 'mtg-card-viewer';
+import Footer from '../Footer';
 const axios = require('axios');
 
 class Cart extends Component {
@@ -35,7 +36,18 @@ class Cart extends Component {
             })
     }
 
+    reducerFunction = (accumulator, currentValue) => accumulator + currentValue;
+
     render() {
+        const prices = []
+        const itemObj = this.state.data ? this.state.data.map(item => {
+            prices.push(item.price)
+        }) : null
+        console.log(prices, "prices")
+
+        const priceTotal = prices.length > 0 ? prices.reduce(this.reducerFunction) : null
+        console.log(priceTotal, "total")
+
         return (
             <div>
                 {this.state.storeData.userType === "customer" ? (
@@ -47,43 +59,48 @@ class Cart extends Component {
                     <h1 className="text-center">{this.state.storeData.email.toUpperCase()}'S CART</h1>
                 </Jumbotron>
                 <Container>
-                    <div>
+                    <table className="table">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col">Card Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">To Buy</th>
+                            </tr>
+                        </thead>
                         {this.state.data.length > 0 ? (
-                            <table className="table">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col">Card Name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">To Buy</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.data.map((result) => (
 
-                                        <tr key={result._id}>
-                                            <td><MtgCardViewer searchTerm={result.name} /></td>
-                                            <td>{result.price}</td>
-                                            <td>
-                                                <button
-                                                    type="submit"
-                                                    value={result.name}
-                                                    className="btn btn-primary"
-                                                    onClick={this.buyCard}
-                                                    id={result.id}
-                                                >
-                                                    Buy!
+                            <tbody>
+                                {this.state.data.map((result) => (
+
+                                    <tr key={result._id}>
+                                        <td><MtgCardViewer searchTerm={result.name} /></td>
+                                        <td>{result.price}</td>
+                                        <td>
+                                            <button
+                                                type="submit"
+                                                value={result.name}
+                                                className="btn"
+                                                onClick={this.buyCard}
+                                                id={result.id}
+                                            >
+                                                Buy!
                                             </button>
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
 
-                                    ))}
-                                </tbody>
-                            </table>
+                                ))}
+                                <tr>
+                                    <td></td>
+                                    <td><b>${priceTotal}</b></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
                         ) : (
                                 <h2 className="text-center">Nothing in Cart</h2>
                             )}
-                    </div>
+                    </table>
                 </Container>
+                <Footer />
             </div>
         )
     }
