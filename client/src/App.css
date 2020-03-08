@@ -2,16 +2,20 @@ h1 {
     font-family: 'Vast Shadow';
 }
 
+body{
+    background-color: whitesmoke;
+}
+
 .third {
     min-width: 30%;
     min-height: 100px;
     color: white;
-    background-color: darkgray;
+    background-color: darkgrey;
 }
 
 .jumbotron {
-    background-color: lightblue;
-    color: black
+    background-color: darkblue;
+    color: whitesmoke
 }
 
 .footer{
@@ -19,12 +23,13 @@ h1 {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: lightblue;
+  background-color: darkblue;
   color: white;
   text-align: center;
 }
 
 .container {
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 

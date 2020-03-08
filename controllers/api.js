@@ -13,11 +13,12 @@ console.log("User Data: " + userData);
 // show what is in cart
 router.get('/cart/:email', (req, res, next) => {
     Cart
-        .find({})
+        .find({email: req.params.email})
         .then(data => res.json(data))
         .catch(next)
 });
 
+//login route
 router.post('/login', function (req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
@@ -102,7 +103,8 @@ router.post('/cart/:id', (req, res, next) => {
             name: req.body.name,
             price: req.body.price,
             image: req.body.image,
-            id: req.params.id
+            id: req.params.id,
+            email: req.body.email
         })
         .then(data => res.json(data))
         .catch(next);

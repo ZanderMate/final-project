@@ -31,7 +31,6 @@ class Cart extends Component {
         console.log(email);
         axios.get(`/api/cart/${email}`)
             .then((results) => {
-                console.log(results.data);
                 this.setState({ data: results.data })
             })
     }
@@ -43,10 +42,8 @@ class Cart extends Component {
         const itemObj = this.state.data ? this.state.data.map(item => {
             prices.push(item.price)
         }) : null
-        console.log(prices, "prices")
 
         const priceTotal = prices.length > 0 ? prices.reduce(this.reducerFunction) : null
-        console.log(priceTotal, "total")
 
         return (
             <div>
@@ -91,7 +88,12 @@ class Cart extends Component {
                                 ))}
                                 <tr>
                                     <td></td>
-                                    <td><b>${priceTotal}</b></td>
+                                    <td><b>Price Total</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><b>${priceTotal.toFixed(2)}</b></td>
                                     <td></td>
                                 </tr>
                             </tbody>

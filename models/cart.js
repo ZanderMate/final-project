@@ -16,6 +16,10 @@ const CartSchema = new Schema({
     id: {
         type: String,
         require: [true, 'Field is required'],
+    },
+    email: {
+        type: String,
+        require: [true, 'Field is required']
     }
 })
 

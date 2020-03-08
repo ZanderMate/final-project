@@ -54,9 +54,13 @@ function CardInfo(props) {
                     </thead>
                     <tbody>
                         {props.results.map((result) => (
+
                             <tr>
-                                <td>
-                                    <b><MtgCardViewer searchTerm={result.name} /></b></td>
+                                {result._isDoublesided ? (
+                                    <td><b>{result.name}</b></td>
+                                ) : (
+                                        <td><b><MtgCardViewer searchTerm={result.name} /></b></td>
+                                    )}
                                 <td>{result.type_line}</td>
                                 <td>{result.prices.usd}</td>
                                 {(result.prices.usd) ? (

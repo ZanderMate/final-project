@@ -20,7 +20,9 @@ const Search = () => {
                 <h1>CARD SEARCH</h1>
             </Jumbotron>
             <Container>
-                <ShowCards />
+                <ShowCards
+                storeData = {storeData}
+                />
             </Container>
             <Footer />
         </div >

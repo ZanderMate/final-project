@@ -5,6 +5,7 @@ class ShowCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            storeData: JSON.parse(localStorage.getItem("store")),
             data: ""
         }
         this.addToCart = this.addToCart.bind(this);
@@ -17,7 +18,7 @@ class ShowCards extends Component {
                 this.setState({
                     data: result.data
                 })
-                console.log(this.state.data)
+                console.log(this.state.storeData.email)
             })
     }
 
@@ -27,6 +28,7 @@ class ShowCards extends Component {
         let image;
         let price;
         const id = e.target.id;
+        const email = this.state.storeData.email
         for (var i = 0; i < this.state.data.length; i++) {
             if (e.target.value === this.state.data[i].cardName) {
                 name = this.state.data[i].cardName;
@@ -38,7 +40,8 @@ class ShowCards extends Component {
             name: name,
             price: price,
             image: image,
-            id: id
+            id: id,
+            email: email
         })
             .then(result => {
                 console.log('added to cart!')
