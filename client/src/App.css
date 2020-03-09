@@ -1,5 +1,5 @@
 h1 {
-    font-family: 'Vast Shadow';
+    font-family: 'Aclonica', sans-serif;
 }
 
 body{
@@ -14,8 +14,7 @@ body{
 }
 
 .jumbotron {
-    background-color: darkblue;
-    color: whitesmoke
+    background-color: lightblue;
 }
 
 .footer{
