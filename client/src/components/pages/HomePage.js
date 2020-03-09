@@ -2,7 +2,7 @@ import React from 'react';
 import Jumbotron from '../Jumbotron';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const HomePage = () => {
     return (
         <Jumbotron>
             <div className="text-center">
@@ -24,4 +24,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default HomePage;
