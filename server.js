@@ -6,10 +6,12 @@ const routes = require('./controllers/api');
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
+const path = require('path');
 
 require('dotenv').config();
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 const port = process.env.PORT || 3001;
 
 mongoose.connect(process.env.DB,
@@ -52,6 +54,10 @@ app.use((err, req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
+});
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 app.listen(port, () => { console.log('Server running on port ' + port) });
