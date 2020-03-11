@@ -29,7 +29,7 @@ class LoginForm extends Component {
             if (data.userType === "vendor") {
                 //Vendor
 
-                window.location.href = '/storefront/' + data.urlName;
+                window.location.href = '/storefront';
 
             }
             else if (data.userType === 'customer') {
@@ -45,7 +45,7 @@ class LoginForm extends Component {
                 <NavTabs />
                 <Jumbotron>
                     <div className="text-center">
-                        <img src="./assets/images/Tigris.png" alt="placeholder logo" />
+                        <img src="./assets/images/Tigris[1].png" alt="placeholder logo" />
                     </div>
                     <br />
                     <br />

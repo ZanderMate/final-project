@@ -97,7 +97,13 @@ class Cart extends Component {
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td>
+                                        <input
+                                            className="text-center btn-cart btn"
+                                            value="Clear Cart"
+                                            type="submit"
+                                        />
+                                    </td>
                                     <td><b>${priceTotal.toFixed(2)}</b></td>
                                     <td>
                                         <input

@@ -41,7 +41,7 @@ const Signup = () => {
             <NavTabs />
             <Jumbotron>
                 <div className="text-center">
-                    <img src="./assets/images/Tigris.png" alt="placeholder logo" />
+                    <img src="./assets/images/Tigris[1].png" alt="placeholder logo" />
                 </div>
                 <br />
                 <br />
