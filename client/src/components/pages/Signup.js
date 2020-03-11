@@ -49,7 +49,7 @@ const Signup = () => {
                 <br />
                 <div className="text-center">
                     <div style={{ display: userType === 'customer' ? 'none' : 'block' }}>
-                        <p>Business Name</p>
+                        <p><b>Business Name</b></p>
                         <input
                             type="text"
                             name="businessName"
@@ -58,7 +58,7 @@ const Signup = () => {
                             onChange={e => setBusinessName(e.target.value)} />
                     </div>
                     <br />
-                    <p>Email</p>
+                    <p><b>Email</b></p>
                     <input
                         type="text"
                         name="email"
@@ -67,7 +67,7 @@ const Signup = () => {
                         required />
                     <br />
                     <br />
-                    <p>Password</p>
+                    <p><b>Password</b></p>
                     <input
                         type="text"
                         name="password"

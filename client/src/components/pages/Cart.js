@@ -35,6 +35,11 @@ class Cart extends Component {
             })
     }
 
+    buyFullCart = (e) => {
+        e.preventDefault();
+        
+    }
+
     reducerFunction = (accumulator, currentValue) => accumulator + currentValue;
 
     render() {
@@ -56,27 +61,27 @@ class Cart extends Component {
                     <h1 className="text-center">{this.state.storeData.email.toUpperCase()}'S CART</h1>
                 </Jumbotron>
                 <Container>
-                    <table className="table">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">Card Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">To Buy</th>
-                            </tr>
-                        </thead>
-                        {this.state.data.length > 0 ? (
+                    {this.state.data.length > 0 ? (
+                        <table className="table">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th scope="col">Card Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">To Buy</th>
+                                </tr>
+                            </thead>
+
 
                             <tbody>
                                 {this.state.data.map((result) => (
-
                                     <tr key={result._id}>
-                                        <td><MtgCardViewer searchTerm={result.name} /></td>
+                                        <td><b><MtgCardViewer searchTerm={result.name} /></b></td>
                                         <td>{result.price}</td>
                                         <td>
                                             <button
                                                 type="submit"
                                                 value={result.name}
-                                                className="btn"
+                                                className="btn btn-cart"
                                                 onClick={this.buyCard}
                                                 id={result.id}
                                             >
@@ -94,13 +99,18 @@ class Cart extends Component {
                                 <tr>
                                     <td></td>
                                     <td><b>${priceTotal.toFixed(2)}</b></td>
-                                    <td></td>
+                                    <td>
+                                        <input
+                                            className="text-center btn-cart btn"
+                                            value="Buy Full Cart!"
+                                        ></input>
+                                    </td>
                                 </tr>
                             </tbody>
-                        ) : (
-                                <h2 className="text-center">Nothing in Cart</h2>
-                            )}
-                    </table>
+                        </table>
+                    ) : (
+                            <h2 className="text-center subtitle" style={{ fontSize: 28 }}>Nothing in Cart</h2>
+                        )}
                 </Container>
                 <Footer />
             </div>

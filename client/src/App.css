@@ -2,6 +2,12 @@ h1 {
     font-family: 'Aclonica', sans-serif;
 }
 
+.nav-tabs {
+    background-color: lightblue;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 0;
+}
+
 body{
     background-color: whitesmoke;
 }
@@ -9,8 +15,9 @@ body{
 .third {
     min-width: 30%;
     min-height: 100px;
-    color: white;
-    background-color: darkgrey;
+    background-color: whitesmoke;
+    border: 0px;
+    float: left;
 }
 
 .jumbotron {
@@ -22,7 +29,7 @@ body{
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: darkblue;
+  background-color:lightblue;
   color: white;
   text-align: center;
 }
@@ -34,5 +41,27 @@ body{
 
 .btn {
     background-color: black;
-    color: whitesmoke
+    color: whitesmoke;
+    border: 0px;
+}
+
+.btn-logout {
+    background-color: #444340;
+}
+
+.btn-cart {
+    background-color: blue;
+    max-width: 115px;
+}
+
+.subtitle {
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-space {
+    margin-bottom: 50px;
+}
+
+a {
+    color: black
 }

@@ -50,10 +50,10 @@ const AddItems = () => {
             <VendorNavbar />
             <Jumbotron>
                 <h1 className="text-center">{storeData.businessName.toUpperCase()}</h1>
-                <h2 className="text-center" style={{ lineHeight: 1.5 }}>Add Item to Inventory</h2>
+                <h2 className="text-center subtitle" style={{ fontSize: 28 }}>Add Item to Inventory</h2>
                 <br />
                 <div className="text-center">
-                    <p>Card Name:</p>
+                    <p style={{fontSize: 18}}>Card Name:</p>
                     <input
                         type="text"
                         name="card-name"
@@ -63,7 +63,7 @@ const AddItems = () => {
                     />
                     <br />
                     <br />
-                    <p>Card Type:</p>
+                    <p style={{fontSize: 18}}>Card Type:</p>
                     <input
                         type="text"
                         name="card-type"
@@ -73,7 +73,7 @@ const AddItems = () => {
                     />
                     <br />
                     <br />
-                    <p>Card Color:</p>
+                    <p style={{fontSize: 18}}>Card Color:</p>
                     <input
                         type="text"
                         name="card-color"

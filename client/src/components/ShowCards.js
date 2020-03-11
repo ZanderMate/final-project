@@ -53,7 +53,7 @@ class ShowCards extends Component {
         return (
             <div>
                 {this.state.data.length > 0 ? (
-                    <div className="card-deck justify-content-center">
+                    <div className="card-deck">
                         {this.state.data.map((result) => (
                             <div className="card third col-3" key={result._id}>
                                 <img className="card-img-top" src={result.imgsource} alt="mtg card" />
@@ -74,7 +74,7 @@ class ShowCards extends Component {
                         ))}
                     </div>
                 ) : (
-                        <h2>Nothing to Buy</h2>
+                        <h2 className="subtitle" style={{ fontSize: 28 }}>Nothing to Buy</h2>
                     )
                 }
             </div>

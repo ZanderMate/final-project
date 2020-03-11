@@ -17,7 +17,7 @@ const Search = () => {
                     <VendorNavbar />
                 )}
             <Jumbotron>
-                <h1>CARD SEARCH</h1>
+                <h1>CARD CATALOG</h1>
             </Jumbotron>
             <Container>
                 <ShowCards

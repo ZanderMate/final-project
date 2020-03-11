@@ -59,7 +59,7 @@ function CardInfo(props) {
                                 {result._isDoublesided ? (
                                     <td><b>{result.name}</b></td>
                                 ) : (
-                                        <td><b><MtgCardViewer searchTerm={result.name} /></b></td>
+                                        <td><b><MtgCardViewer searchTerm={result.name} mobileMode={true}/></b></td>
                                     )}
                                 <td>{result.type_line}</td>
                                 <td>{result.prices.usd}</td>
@@ -81,7 +81,7 @@ function CardInfo(props) {
                     </tbody>
                 </table>
             ) : (
-                    <h2>No Results</h2>
+                    <h2 className="subtitle" style={{ fontSize: 28 }}>No Results</h2>
                 )}
         </div>
 

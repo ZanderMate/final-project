@@ -38,7 +38,7 @@ export default class Storefront extends Component {
                     <br />
                 </Jumbotron>
                 <Container>
-                    <h3><b><u>Items to Sell:</u></b></h3>
+                    {/* <h3 className="text-center card-space" style={{ fontSize: 36 }}>Inventory:</h3> */}
                     <div>
                         {this.state.items.length > 0 ? (
                             <div className="card-deck justify-content-center">
@@ -54,7 +54,7 @@ export default class Storefront extends Component {
                                 ))}
                             </div>
                         ) : (
-                                <h2>Nothing to Sell</h2>
+                                <h2 className="text-center">Nothing to Sell</h2>
                             )}
                     </div>
                 </Container>
