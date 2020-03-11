@@ -37,7 +37,7 @@ class Cart extends Component {
 
     buyFullCart = (e) => {
         e.preventDefault();
-        
+
     }
 
     reducerFunction = (accumulator, currentValue) => accumulator + currentValue;
@@ -103,6 +103,7 @@ class Cart extends Component {
                                         <input
                                             className="text-center btn-cart btn"
                                             value="Buy Full Cart!"
+                                            type="submit"
                                         ></input>
                                     </td>
                                 </tr>
