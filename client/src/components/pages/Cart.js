@@ -35,9 +35,51 @@ class Cart extends Component {
             })
     }
 
-    buyFullCart = (e) => {
+    buyFullCart = e => {
+        //go through items array that is the same as array
         e.preventDefault();
+        let cart = this.state.data;
+        console.log(cart);
+        // let items = []
+        axios.get('/api/items')
+            .then(res => {
+                let items = res.data;
+                cart.forEach(cartItem => {
+                    console.log(items, "items in loop")
+                    if (items.some(item => item._id === cartItem.id)) {
+                        axios.delete(`/api/items/${cartItem.id}`)
+                        .then(res => {
+                            console.log("deleted item for search page!")
+                        })
+                    }
+                })
+                this.emptyCart(e);
+            })
 
+        // cart.map(data => {
+        //     if (cart.id === items._id) {
+
+        //     }
+        // });
+    }
+
+    removeItem = e => {
+        e.preventDefault();
+        const id = e.target.id
+        axios.delete(`/api/cart/${id}`)
+            .then(res => {
+                console.log("Removed item from cart!");
+                window.location.reload();
+            })
+    }
+
+    emptyCart = e => {
+        e.preventDefault();
+        axios.delete('/api/cart')
+            .then(res => {
+                console.log('You have cleared cart!')
+                window.location.reload();
+            })
     }
 
     reducerFunction = (accumulator, currentValue) => accumulator + currentValue;
@@ -68,10 +110,9 @@ class Cart extends Component {
                                     <th scope="col">Card Name</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">To Buy</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
-
-
                             <tbody>
                                 {this.state.data.map((result) => (
                                     <tr key={result._id}>
@@ -88,6 +129,15 @@ class Cart extends Component {
                                                 Buy!
                                             </button>
                                         </td>
+                                        <td>
+                                            <input
+                                                type="submit"
+                                                value="Remove Item"
+                                                className="btn btn-cart"
+                                                id={result.id}
+                                                onClick={this.removeItem}
+                                            />
+                                        </td>
                                     </tr>
 
                                 ))}
@@ -102,6 +152,7 @@ class Cart extends Component {
                                             className="text-center btn-cart btn"
                                             value="Clear Cart"
                                             type="submit"
+                                            onClick={this.emptyCart}
                                         />
                                     </td>
                                     <td><b>${priceTotal.toFixed(2)}</b></td>
@@ -110,6 +161,7 @@ class Cart extends Component {
                                             className="text-center btn-cart btn"
                                             value="Buy Full Cart!"
                                             type="submit"
+                                            onClick={this.buyFullCart}
                                         ></input>
                                     </td>
                                 </tr>

@@ -138,4 +138,11 @@ router.delete('/items/:id', (req, res, next) => {
         .catch(next)
 });
 
+//delete everything from cart
+router.delete('/cart', (req, res, next) => {
+    Cart.deleteMany({})
+    .then(result => res.json(result))
+    .catch(next)
+})
+
 module.exports = router;
