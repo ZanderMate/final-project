@@ -13,7 +13,7 @@ const Footer = () => {
             <input
                 onClick={logOut}
                 type="submit"
-                className="btn btn-logout"
+                className="btn my-3 btn-logout"
                 value="Log Out"
             />
         </div>

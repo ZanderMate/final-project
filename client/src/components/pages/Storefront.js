@@ -38,10 +38,9 @@ export default class Storefront extends Component {
                     <br />
                 </Jumbotron>
                 <Container>
-                    {/* <h3 className="text-center card-space" style={{ fontSize: 36 }}>Inventory:</h3> */}
                     <div>
                         {this.state.items.length > 0 ? (
-                            <div className="card-deck justify-content-center">
+                            <div className="card-deck">
                                 {this.state.items.map((result) => (
                                     <div className="card third col-3 text-center" key={result._id}>
                                         <img className="card-img-top image-card third" src={result.imgsource} alt="mtg card" />
