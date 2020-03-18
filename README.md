@@ -1,5 +1,7 @@
 # Project 3: Shopping Platform
 
+Deployed App: https://griep-final-project.herokuapp.com/
+
 ![image](https://user-images.githubusercontent.com/54219054/76577481-8c988f80-6493-11ea-8382-a06701fbe753.png)
 
 ## Description
