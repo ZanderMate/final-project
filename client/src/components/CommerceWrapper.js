@@ -4,9 +4,9 @@ import HomePage from './pages/HomePage';
 import Signup from './pages/Signup';
 import LoginForm from './pages/Loginpage';
 import Storefront from './pages/Storefront';
-import AddItem from './pages/Add'
-import Search from './pages/Search'
-import Cart from './pages/Cart'
+import AddItem from './pages/Add';
+import Cart from './pages/Cart';
+import Categories from './pages/Categories';
 
 const CommerceWrapper = () => {
     return (
@@ -17,8 +17,8 @@ const CommerceWrapper = () => {
                 <Route exact path="/login" component={LoginForm} />
                 <Route path="/storefront" component={Storefront} />
                 <Route path="/add" component={AddItem} />
-                <Route exact path="/search" component={Search} />
                 <Route path="/cart" component={Cart} />
+                <Route path="/search" component={Categories} />
             </Router>
         </div>
     )

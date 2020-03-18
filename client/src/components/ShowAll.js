@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, setState } from 'react';
 const axios = require('axios');
 
-class ShowCards extends Component {
+class ShowAll extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            storeData: JSON.parse(localStorage.getItem("store")),
+            category: props.category,
+            storeData: props.storeData,
             data: ""
         }
         this.addToCart = this.addToCart.bind(this);
@@ -30,13 +31,13 @@ class ShowCards extends Component {
         const id = e.target.id;
         const email = this.state.storeData.email
         for (var i = 0; i < this.state.data.length; i++) {
-            if (e.target.value === this.state.data[i].cardName) {
-                name = this.state.data[i].cardName;
+            if (e.target.value === this.state.data[i].name) {
+                name = this.state.data[i].name;
                 image = this.state.data[i].imgsource;
                 price = this.state.data[i].price;
             }
         }
-        axios.post(`/api/cart/${id}`, {
+        axios.post(`/api/cart`, {
             name: name,
             price: price,
             image: image,
@@ -45,9 +46,9 @@ class ShowCards extends Component {
         })
             .then(result => {
                 console.log('added to cart!')
-                window.location.href = '/cart';
             })
     }
+
 
     render() {
         return (
@@ -55,8 +56,8 @@ class ShowCards extends Component {
                 {this.state.data.length > 0 ? (
                     <div className="card-deck">
                         {this.state.data.map((result) => (
-                            <div className="card third col-3" key={result._id}>
-                                <img className="card-img-top" src={result.imgsource} alt="mtg card" />
+                            <div className="card third col-3 text-center" key={result._id}>
+                                <img className="card-img-top image-card third" style={{ minHeight: 450 }} src={result.imgsource} alt="item card" />
                                 <div className="card-body">
                                     <h5 className="card-title">{result.cardName}</h5>
                                     <p className="card-text">{result.type_line}</p>
@@ -64,7 +65,7 @@ class ShowCards extends Component {
                                     <button
                                         type="submit"
                                         id={result._id}
-                                        value={result.cardName}
+                                        value={result.name}
                                         className="btn btn-primary"
                                         onClick={this.addToCart}>
                                         Add to Cart
@@ -82,4 +83,4 @@ class ShowCards extends Component {
     }
 }
 
-export default ShowCards;
+export default ShowAll;

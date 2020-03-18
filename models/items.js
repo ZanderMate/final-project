@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const SaleItemSchema = new Schema({
-    cardName: {
+    name: {
         type: String,
         required: [true, 'The field is required']
     },
@@ -9,12 +9,12 @@ const SaleItemSchema = new Schema({
         type: String,
         required: [true, 'The field is required']
     },
-    type_line: {
-        type: String,
-        required: [true, 'The field is required']
-    },
     imgsource: {
         type: String
+    },
+    category: {
+        type: String,
+        required: [true, 'The field is required']
     },
     vendor: {
         type: String,

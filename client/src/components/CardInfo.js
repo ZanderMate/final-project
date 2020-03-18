@@ -11,13 +11,11 @@ function CardInfo(props) {
         let name;
         let price;
         let imgsource;
-        let typeLine;
         let vendor;
         for (var i = 0; i < props.results.length; i++) {
             if (props.results[i].name === event.target.name) {
                 price = props.results[i].prices.usd;
-                typeLine = props.results[i].type_line
-                vendor = storeData.businessName
+                vendor = storeData.businessName;
                 if (props.results[i].card_faces) {
                     imgsource = props.results[i].card_faces[0].image_uris.normal;
                     name = props.results[i].card_faces[0].name
@@ -26,14 +24,13 @@ function CardInfo(props) {
                     name = props.results[i].name;
                 }
             }
-            console.log(name)
         }
         axios.post('/api/items', {
-            cardName: name,
+            name: name,
             price: price,
             imgsource: imgsource,
-            type_line: typeLine,
-            vendor: vendor
+            vendor: vendor,
+            category: "mtg",
         }).then(res => {
             console.log("Added item successfully!")
             console.log("vendor: " + vendor)

@@ -6,7 +6,7 @@ import ShowCards from '../ShowCards';
 import Footer from '../Footer';
 import Container from '../Container';
 
-const Search = () => {
+const Inventory = () => {
     const [storeData, setStoreData] = useState(JSON.parse(localStorage.getItem("store")))
 
     return (
@@ -17,11 +17,11 @@ const Search = () => {
                     <VendorNavbar />
                 )}
             <Jumbotron>
-                <h1>CARD CATALOG</h1>
+                <h1>GAME CATALOG</h1>
             </Jumbotron>
             <Container>
                 <ShowCards
-                storeData = {storeData}
+                    storeData={storeData}
                 />
             </Container>
             <Footer />
@@ -29,4 +29,4 @@ const Search = () => {
     )
 }
 
-export default Search;
+export default Inventory;

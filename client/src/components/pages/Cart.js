@@ -3,7 +3,6 @@ import ClientNavbar from '../ClientNavbar';
 import VendorNavbar from '../VendorNavbar'
 import Jumbotron from '../Jumbotron';
 import Container from '../Container';
-import { MtgCardViewer } from 'mtg-card-viewer';
 import Footer from '../Footer';
 const axios = require('axios');
 
@@ -32,6 +31,7 @@ class Cart extends Component {
         axios.get(`/api/cart/${email}`)
             .then((results) => {
                 this.setState({ data: results.data })
+                console.log(this.state.data);
             })
     }
 
@@ -48,19 +48,13 @@ class Cart extends Component {
                     console.log(items, "items in loop")
                     if (items.some(item => item._id === cartItem.id)) {
                         axios.delete(`/api/items/${cartItem.id}`)
-                        .then(res => {
-                            console.log("deleted item for search page!")
-                        })
+                            .then(res => {
+                                console.log("deleted item for search page!")
+                            })
                     }
                 })
                 this.emptyCart(e);
             })
-
-        // cart.map(data => {
-        //     if (cart.id === items._id) {
-
-        //     }
-        // });
     }
 
     removeItem = e => {
@@ -107,6 +101,7 @@ class Cart extends Component {
                         <table className="table">
                             <thead className="thead-dark">
                                 <tr>
+                                    <th scope="col"></th>
                                     <th scope="col">Card Name</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">To Buy</th>
@@ -116,8 +111,9 @@ class Cart extends Component {
                             <tbody>
                                 {this.state.data.map((result) => (
                                     <tr key={result._id}>
-                                        <td><b><MtgCardViewer searchTerm={result.name} /></b></td>
-                                        <td>{result.price}</td>
+                                        <td><b><img src={result.image} className="zoom" alt="cart item" style={{maxHeight: 40}}/></b></td>
+                                        <td><b>{result.name}</b></td>
+                                        <td>{result.price.toFixed(2)}</td>
                                         <td>
                                             <button
                                                 type="submit"
@@ -142,19 +138,8 @@ class Cart extends Component {
 
                                 ))}
                                 <tr>
-                                    <td></td>
-                                    <td><b>Price Total</b></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input
-                                            className="text-center btn-cart btn"
-                                            value="Clear Cart"
-                                            type="submit"
-                                            onClick={this.emptyCart}
-                                        />
-                                    </td>
+                                    <td />
+                                    <td>Price Total:</td>
                                     <td><b>${priceTotal.toFixed(2)}</b></td>
                                     <td>
                                         <input
@@ -163,6 +148,14 @@ class Cart extends Component {
                                             type="submit"
                                             onClick={this.buyFullCart}
                                         ></input>
+                                    </td>
+                                    <td>
+                                        <input
+                                            className="text-center btn-cart btn"
+                                            value="Clear Cart"
+                                            type="submit"
+                                            onClick={this.emptyCart}
+                                        />
                                     </td>
                                 </tr>
                             </tbody>

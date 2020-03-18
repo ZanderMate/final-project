@@ -10,10 +10,12 @@ const keys = require('../config/keys')
 let userData;
 console.log("User Data: " + userData);
 
+// api URL for Game Board Atlas Search: https://www.boardgameatlas.com/api/search?name={BoardGameName}&client_id=DUquorfjgf
+
 // show what is in cart
 router.get('/cart/:email', (req, res, next) => {
     Cart
-        .find({email: req.params.email})
+        .find({ email: req.params.email })
         .then(data => res.json(data))
         .catch(next)
 });
@@ -79,7 +81,6 @@ router.get('/items/', (req, res, next) => {
 
 //add login info
 router.post('/signup', (req, res, next) => {
-    //check that all required fields are filled
     const { businessName, email, password, userType } = req.body;
     console.log(req.body);
     if (email && password && userType) {
@@ -96,14 +97,22 @@ router.post('/signup', (req, res, next) => {
     }
 })
 
+// Show a particular category of items only
+router.get('/category/:category', (req, res, next) => {
+    SaleItem
+        .find({ category: req.params.category })
+        .then(data => res.json(data))
+        .catch(next);
+})
+
 // add to cart
-router.post('/cart/:id', (req, res, next) => {
+router.post('/cart', (req, res, next) => {
     Cart
         .create({
             name: req.body.name,
             price: req.body.price,
             image: req.body.image,
-            id: req.params.id,
+            id: req.body.id,
             email: req.body.email
         })
         .then(data => res.json(data))
@@ -112,8 +121,8 @@ router.post('/cart/:id', (req, res, next) => {
 
 //add to items
 router.post('/items', (req, res, next) => {
-    const { cardName, price, imgsource, type_line, vendor } = req.body;
-    if (cardName && price && imgsource && type_line) {
+    const { name, price, imgsource, type_line, vendor, category } = req.body;
+    if (name && price && imgsource && category) {
         SaleItem
             .create(req.body)
             .then(data => res.json(data))
@@ -141,8 +150,8 @@ router.delete('/items/:id', (req, res, next) => {
 //delete everything from cart
 router.delete('/cart', (req, res, next) => {
     Cart.deleteMany({})
-    .then(result => res.json(result))
-    .catch(next)
+        .then(result => res.json(result))
+        .catch(next)
 })
 
 module.exports = router;
