@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ClientNavbar from '../ClientNavbar';
 import VendorNavbar from '../VendorNavbar';
 import Container from '../Container';
-import Jumbotron from '../Jumbotron';
+import NormalJumbotron from '../Jumbotron';
 import Footer from '../Footer';
 import Row from '../Row';
 import CategoryCol from '../Categorycol';
@@ -49,7 +49,7 @@ const Categories = () => {
     return (
         <div>
             {storeData.userType === "customer" ? (<ClientNavbar />) : (<VendorNavbar />)}
-            <Jumbotron>
+            <NormalJumbotron>
                 <Container>
                     <h1 className="text-center">GAME CATALOG</h1>
                     <br />
@@ -86,7 +86,7 @@ const Categories = () => {
                         </CategoryCol>
                     </Row>
                 </Container>
-            </Jumbotron >
+            </NormalJumbotron>
             <Container>
                 {handleChange()}
             </Container>

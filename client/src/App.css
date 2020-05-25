@@ -20,14 +20,22 @@ body{
     float: left;
 }
 
-.jumbotron {
+.login-jumbotron {
     background-color: lightblue;
     padding-top: 32px;
     padding-bottom: 100px;
-    min-height: 100vh
 }
 
-.login-form {
+.jumbotron {
+    background-color: lightblue;
+    padding-bottom: 10px;
+}
+
+.category-btn {
+    min-width: 120px;
+}
+
+.form {
     padding-top: 32px;
     padding-bottom: 30px;
     width: 500px;
@@ -82,3 +90,6 @@ a {
     transform: scale(4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
+.container {
+    padding-bottom: 1px;
+}

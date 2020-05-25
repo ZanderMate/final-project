@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VendorNavbar from '../VendorNavbar';
-import Jumbotron from '../Jumbotron';
+import NormalJumbotron from '../Jumbotron';
 import Footer from '../Footer';
 import Container from '../Container';
 import axios from 'axios';
@@ -31,11 +31,10 @@ export default class Storefront extends Component {
         return (
             <div>
                 <VendorNavbar />
-                <Jumbotron>
+                <NormalJumbotron>
                     <h1 className="text-center">{this.state.storeData.businessName.toUpperCase()}'S STOREFRONT</h1>
                     <br />
-                    <br />
-                </Jumbotron>
+                </NormalJumbotron>
                 <Container>
                     <div>
                         {this.state.items.length > 0 ? (

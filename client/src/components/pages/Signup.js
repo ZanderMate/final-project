@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Jumbotron from '../Jumbotron';
+import LoginJumbotron from '../LoginJumbotron';
 import NavTabs from '../navtabs';
 import Form from '../Form';
 import axios from 'axios';
@@ -40,7 +40,9 @@ const Signup = () => {
     return (
         <div>
             <NavTabs />
-            <Jumbotron>
+            <LoginJumbotron
+                style={{ minHeight: "100vh" }}
+            >
                 <div className="text-center">
                     <img src="./assets/images/Tigris[1].png" alt="placeholder logo" />
                 </div>
@@ -105,7 +107,7 @@ const Signup = () => {
                         />
                     </div>
                 </Form>
-            </Jumbotron>
+            </LoginJumbotron>
         </div >
     )
 }

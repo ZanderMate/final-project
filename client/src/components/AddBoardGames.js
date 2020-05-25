@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Container from './Container';
 import BoardGameInfo from './BoardGameInfo';
+import Form from './Form';
 const axios = require('axios');
 
 const AddBoardGames = () => {
@@ -25,26 +26,28 @@ const AddBoardGames = () => {
 
     return (
         <div className="text-center">
-            <p style={{ fontSize: 18 }}>Board Game Name:</p>
-            <input
-                type="text"
-                name="board-game-name"
-                value={name}
-                style={{minHeight: 36}}
-                placeholder="Board Game"
-                onChange={e => setName(e.target.value)}
-            />
-            <input
-                type="submit"
-                value="Search"
-                className="btn"
-                onClick={handleFormSubmit}
-            />
-            <Container>
-                <BoardGameInfo
-                    results={results}
+            <Form>
+                <p style={{ fontSize: 20 }}>Board Game Name:</p>
+                <input
+                    type="text"
+                    name="board-game-name"
+                    value={name}
+                    style={{ minHeight: 36 }}
+                    placeholder="Board Game"
+                    onChange={e => setName(e.target.value)}
                 />
-            </Container>
+                <input
+                    type="submit"
+                    value="Search"
+                    className="btn"
+                    onClick={handleFormSubmit}
+                />
+                </Form>
+                <Container>
+                    <BoardGameInfo
+                        results={results}
+                    />
+                </Container>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import NavTabs from '../navtabs'
-import Jumbotron from '../Jumbotron';
+import LoginJumbotron from '../LoginJumbotron';
 import Form from '../Form';
 
 class LoginForm extends Component {
@@ -44,7 +44,9 @@ class LoginForm extends Component {
         return (
             <div>
                 <NavTabs />
-                <Jumbotron>
+                <LoginJumbotron
+                    style={{ minHeight: "100vh" }}
+                >
                     <div className="text-center">
                         <img src="./assets/images/Tigris[1].png" alt="placeholder logo" />
                     </div>
@@ -88,7 +90,7 @@ class LoginForm extends Component {
                             />
                         </div>
                     </Form>
-                </Jumbotron>
+                </LoginJumbotron>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ClientNavbar from '../ClientNavbar';
 import VendorNavbar from '../VendorNavbar'
-import Jumbotron from '../Jumbotron';
+import NormalJumbotron from '../Jumbotron';
 import Container from '../Container';
 import Footer from '../Footer';
 const axios = require('axios');
@@ -93,9 +93,9 @@ class Cart extends Component {
                 ) : (
                         <VendorNavbar />
                     )}
-                <Jumbotron>
+                <NormalJumbotron>
                     <h1 className="text-center">{this.state.storeData.email.toUpperCase()}'S CART</h1>
-                </Jumbotron>
+                </NormalJumbotron>
                 <Container>
                     {this.state.data.length > 0 ? (
                         <table className="table">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Container from './Container';
+import Form from './Form';
 import CardInfo from './CardInfo';
 const ScryfallClient = require('scryfall-client')
 const scryfall = new ScryfallClient()
@@ -29,21 +30,23 @@ const AddMtg = () => {
 
     return (
         <div className="text-center">
-            <p style={{ fontSize: 18 }}>Magic Card Name:</p>
-            <input
-                type="text"
-                name="card-name"
-                value={name}
-                style={{minHeight: 36}}
-                placeholder="Card Name"
-                onChange={e => setName(e.target.value)}
-            />
-            <input
-                type="submit"
-                value="Search"
-                className="btn"
-                onClick={handleFormSubmit}
-            />
+            <Form>
+                <p style={{ fontSize: 20 }}>Magic Card Name:</p>
+                <input
+                    type="text"
+                    name="card-name"
+                    value={name}
+                    style={{ minHeight: 36 }}
+                    placeholder="Card Name"
+                    onChange={e => setName(e.target.value)}
+                />
+                <input
+                    type="submit"
+                    value="Search"
+                    className="btn"
+                    onClick={handleFormSubmit}
+                />
+            </Form>
             <Container>
                 <CardInfo
                     results={results}
