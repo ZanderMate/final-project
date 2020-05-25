@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Jumbotron from '../Jumbotron';
 import NavTabs from '../navtabs';
+import Form from '../Form';
 import axios from 'axios';
 const bcrypt = require('bcryptjs');
 
@@ -45,62 +46,65 @@ const Signup = () => {
                 </div>
                 <br />
                 <br />
-                <h1 className="text-center">Sign Up for a Tigris Account!</h1>
-                <br />
-                <div className="text-center">
-                    <div style={{ display: userType === 'customer' ? 'none' : 'block' }}>
-                        <p><b>Business Name</b></p>
+                <Form>
+                    <h1 className="text-center">Sign Up for a Tigris Account!</h1>
+                    <br />
+                    <div className="text-center">
+                        <div style={{ display: userType === 'customer' ? 'none' : 'block' }}>
+                            <p><b>Business Name</b></p>
+                            <input
+                                type="text"
+                                name="businessName"
+                                value={businessName}
+                                placeholder="Business Name"
+                                onChange={e => setBusinessName(e.target.value)} />
+                        </div>
+                        <br />
+                        <p><b>Email</b></p>
                         <input
                             type="text"
-                            name="businessName"
-                            value={businessName}
-                            placeholder="Business Name"
-                            onChange={e => setBusinessName(e.target.value)} />
+                            name="email"
+                            placeholder="Email"
+                            onChange={e => setEmail(e.target.value)}
+                            required />
+                        <br />
+                        <br />
+                        <p><b>Password</b></p>
+                        <input
+                            type="text"
+                            name="password"
+                            placeholder="Password"
+                            onChange={e => setPassword(e.target.value)}
+                            required />
+                        <br />
+                        <br />
+                        <input
+                            type="radio"
+                            value="customer"
+                            name="userType"
+                            onChange={() => setUserType('customer')}
+                            onClick={() => setUserType('customer')}
+                            checked={userType === 'customer'} />
+                        <label> Customer </label>
+                        <br />
+                        <input
+                            type="radio"
+                            value="vendor"
+                            name="userType"
+                            onChange={() => setUserType('vendor')}
+                            onClick={() => setUserType('vendor')}
+                            checked={userType === 'vendor'} />
+                        <label> Vendor </label>
+                        <br />
+                        <br />
+                        <input
+                            type="submit"
+                            value="Sign Up"
+                            className="btn"
+                            onClick={handleFormSubmit}
+                        />
                     </div>
-                    <br />
-                    <p><b>Email</b></p>
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="Email"
-                        onChange={e => setEmail(e.target.value)}
-                        required />
-                    <br />
-                    <br />
-                    <p><b>Password</b></p>
-                    <input
-                        type="text"
-                        name="password"
-                        placeholder="Password"
-                        onChange={e => setPassword(e.target.value)}
-                        required />
-                    <br />
-                    <br />
-                    <input
-                        type="radio"
-                        value="customer"
-                        name="userType"
-                        onChange={() => setUserType('customer')}
-                        onClick={() => setUserType('customer')}
-                        checked={userType === 'customer'} />
-                    <label> Customer </label>
-                    <br />
-                    <input
-                        type="radio"
-                        value="vendor"
-                        name="userType"
-                        onChange={() => setUserType('vendor')}
-                        onClick={() => setUserType('vendor')}
-                        checked={userType === 'vendor'} />
-                    <label> Vendor </label>
-                    <br />
-                    <input
-                        type="submit"
-                        value="Sign Up"
-                        className="btn"
-                        onClick={handleFormSubmit}
-                    />
-                </div>
+                </Form>
             </Jumbotron>
         </div >
     )
