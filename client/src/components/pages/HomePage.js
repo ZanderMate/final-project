@@ -1,10 +1,10 @@
 import React from 'react';
-import LoginJumbotron from '../LoginJumbotron';
+import HomeJumbotron from '../HomeJumbotron';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     return (
-        <LoginJumbotron>
+        <HomeJumbotron>
             <div className="text-center">
                 <img src="./assets/images/Tigris[1].png" alt="placeholder logo" />
             </div>
@@ -13,14 +13,14 @@ const HomePage = () => {
             <h1 className="text-center">Welcome to Tigris Shopping!</h1>
             <br />
             <div className="text-center">
-                <Link to="/signup" className="btn">Sign-Up</Link>
+                <Link to="/signup" className="btn">Sign Up</Link>
             </div>
             <br />
             <div className="text-center">
-                <Link to="/login" className="btn">Log-In</Link>
+                <Link to="/login" className="btn">Log In</Link>
             </div>
             <br />
-        </LoginJumbotron>
+        </HomeJumbotron>
     )
 }
 

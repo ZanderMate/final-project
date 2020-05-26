@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import LoginJumbotron from '../LoginJumbotron';
+import HomeJumbotron from '../HomeJumbotron';
 import NavTabs from '../navtabs';
 import Form from '../Form';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const bcrypt = require('bcryptjs');
 
 const Signup = () => {
@@ -39,8 +40,7 @@ const Signup = () => {
 
     return (
         <div>
-            <NavTabs />
-            <LoginJumbotron
+            <HomeJumbotron
                 style={{ minHeight: "100vh" }}
             >
                 <div className="text-center">
@@ -105,9 +105,15 @@ const Signup = () => {
                             className="btn"
                             onClick={handleFormSubmit}
                         />
+                        <br />
+                        <br />
+                        <p style={{fontSize: 14}}>Already Have an Account?</p>
+                        <div className="text-center">
+                            <Link to="/login" className="btn">Log In</Link>
+                        </div>
                     </div>
                 </Form>
-            </LoginJumbotron>
+            </HomeJumbotron>
         </div >
     )
 }

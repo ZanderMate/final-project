@@ -1,7 +1,7 @@
 import React from "react";
 
 function Form({ children }) {
-  return <div className="form" style={{width: 500}}>{children}</div>;
+  return <div className="form">{children}</div>;
 }
 
 export default Form;

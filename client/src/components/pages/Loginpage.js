@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import NavTabs from '../navtabs'
-import LoginJumbotron from '../LoginJumbotron';
+import { Link } from 'react-router-dom';
+import HomeJumbotron from '../HomeJumbotron';
 import Form from '../Form';
 
 class LoginForm extends Component {
@@ -43,10 +44,7 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                <NavTabs />
-                <LoginJumbotron
-                    style={{ minHeight: "100vh" }}
-                >
+                <HomeJumbotron>
                     <div className="text-center">
                         <img src="./assets/images/Tigris[1].png" alt="placeholder logo" />
                     </div>
@@ -88,9 +86,15 @@ class LoginForm extends Component {
                                 type="submit"
                                 value="Log In"
                             />
+                            <br />
+                            <br />
+                            <p style={{fontSize: 14}}>Don't Have an Account?</p>
+                            <div className="text-center">
+                                <Link to="/signup" className="btn">Sign Up</Link>
+                            </div>
                         </div>
                     </Form>
-                </LoginJumbotron>
+                </HomeJumbotron>
             </div>
         )
     }

@@ -40,8 +40,10 @@ const AddMisc = () => {
                 <br />
                 <br />
                 <p><b>Item Image:</b></p>
-                <h4>This is where the drag and drop will go!</h4>
-                <p>Work in Progress</p>
+                <main className="flexbox">
+                    <h4>This is where the drag and drop will go!</h4>
+                    <p>Work in Progress</p>
+                </main>
             </Form>
         </div>
     )
