@@ -6,7 +6,7 @@ Deployed App: https://griep-final-project.herokuapp.com/
 
 ## Description
 
-This is a shopping platform that is currently be used for selling MTG cards. This includes signing up, logging in, adding cards, adding to carts and buying.
+This is a shopping platform that is currently be used for selling MTG cards and board games. This includes signing up, logging in, adding cards, adding to carts and buying.
 
 ## Technology Used
 
